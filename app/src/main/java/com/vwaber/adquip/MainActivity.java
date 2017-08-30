@@ -1,5 +1,6 @@
 package com.vwaber.adquip;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vwaber.quips.QuipGenerator;
+import com.vwaber.quipstage.StageActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
         QuipGenerator generator = new QuipGenerator();
-        Toast.makeText(this, generator.getNext(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, generator.getNext(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, StageActivity.class);
+        startActivity(intent);
+
     }
 
 //    @Override
