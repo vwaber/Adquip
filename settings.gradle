@@ -1,1 +1,1 @@
-include ':app', ':quips', ':quipstage'
+include ':app', ':quips', ':quipstage', ':backend'
