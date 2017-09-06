@@ -1,6 +1,5 @@
 package com.vwaber.adquip;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -19,7 +18,6 @@ class EndpointsAsyncTask extends AsyncTask<Void, Void, QuipParcelable> {
     private static final String ROOT_URL = "http://10.0.2.2:8080/_ah/api/";
 
     private static QuipService mService = null;
-    private Context mContext;
 
     private final TaskListener taskListener;
 
