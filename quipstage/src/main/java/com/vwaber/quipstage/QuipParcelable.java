@@ -3,22 +3,21 @@ package com.vwaber.quipstage;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.vwaber.adquip.backend.quipService.model.QuipData;
 
 public class QuipParcelable implements Parcelable{
 
     public static final String EXTRA_KEY = "quip-intent-parcelable-extra-key";
 
-    private String setup;
-    private String punchline;
+    private final String setup;
+    private final String punchline;
 
     public String getSetup(){return setup;}
     public String getPunchline(){return punchline;}
 
-    public QuipParcelable() {}
-
-    public QuipParcelable(String setup, String punchline) {
-        this.setup = setup;
-        this.punchline = punchline;
+    public QuipParcelable(QuipData data) {
+        setup = data.getSetup();
+        punchline = data.getPunchline();
     }
 
     private QuipParcelable(Parcel in) {

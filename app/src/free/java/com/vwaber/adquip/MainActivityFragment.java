@@ -11,9 +11,6 @@ import com.google.android.gms.ads.AdView;
 
 public class MainActivityFragment extends Fragment {
 
-
-
-
     public MainActivityFragment() {
     }
 

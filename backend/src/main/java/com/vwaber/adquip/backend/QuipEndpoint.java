@@ -9,7 +9,7 @@ package com.vwaber.adquip.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
-import com.vwaber.quips.Quip;
+import com.vwaber.quips.QuipData;
 import com.vwaber.quips.QuipGenerator;
 
 /**
@@ -30,15 +30,9 @@ public class QuipEndpoint {
      */
     @ApiMethod(name = "getQuip")
     public QuipData getQuip() {
-        QuipData response = new QuipData();
 
         QuipGenerator generator = new QuipGenerator();
-        Quip quip = generator.getNext();
-
-        response.setSetup(quip.getSetup());
-        response.setPunchline(quip.getPunchline());
-
-        return response;
+        return generator.getNext();
     }
 
 }

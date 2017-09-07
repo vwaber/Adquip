@@ -53,8 +53,8 @@ class EndpointsAsyncTask extends AsyncTask<Void, Void, QuipParcelable> {
         }
 
         try {
-            QuipData quipData = mService.getQuip().execute();
-            return new QuipParcelable(quipData.getSetup(),  quipData.getPunchline());
+            QuipData response = mService.getQuip().execute();
+            return new QuipParcelable(response);
         } catch (IOException e) {
             return null;
         }

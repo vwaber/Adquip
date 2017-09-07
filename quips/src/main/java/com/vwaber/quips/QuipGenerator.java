@@ -6,18 +6,21 @@ import java.util.Random;
 
 public class QuipGenerator {
 
-    private List<Quip> quips = new ArrayList<>();
+    private final List<QuipData> quipDatas = new ArrayList<>();
 
     public QuipGenerator(){
-        quips.add(new Quip("Why are plants green?", "To better absorb sunlight"));
-        quips.add(new Quip("What did the turtle say to the rock?", "Nothing"));
-        quips.add(new Quip("Why did the chicken cross the road", "Primitive thought processes"));
+        quipDatas.add(new QuipData("I went to a really emotional wedding the other day", "Even the cake was in tiers"));
+        quipDatas.add(new QuipData("I tried to catch fog yesterday", "Mist"));
+        quipDatas.add(new QuipData("What do you call a dog with no legs?", "It don't matter, its not going to come"));
+        quipDatas.add(new QuipData("I have a genetic predisposition for diarrhea", "Runs in my jeans"));
+        quipDatas.add(new QuipData("Someone stole my mood ring", "I don't know how I feel about it"));
+        quipDatas.add(new QuipData("Why does a chicken coop have two doors? ", "If it had four doors it would be a chicken sedan"));
     }
 
-    public Quip getNext(){
+    public QuipData getNext(){
         Random random = new Random();
-        int n = random.nextInt(quips.size());
-        return quips.get(n);
+        int n = random.nextInt(quipDatas.size());
+        return quipDatas.get(n);
     }
 
 

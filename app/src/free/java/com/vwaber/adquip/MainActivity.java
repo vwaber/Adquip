@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     private InterstitialAd mInterstitialAd;
     private QuipParcelable mQuipParcelable;
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mProgressBar = findViewById(R.id.pb_loading);
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
@@ -34,13 +38,14 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
             @Override
             public void onAdClosed() {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                if(mQuipParcelable != null) loadStageActivity();
+                if(mQuipParcelable != null) loadStageActivity(mQuipParcelable);
             }
         });
 
     }
 
     public void tellJoke(View view) {
+        mProgressBar.setVisibility(View.VISIBLE);
         if(mInterstitialAd.isLoaded()) mInterstitialAd.show();
         new EndpointsAsyncTask(this).execute();
     }
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     @Override
     public void onTaskFinished(QuipParcelable data) {
 
+        mProgressBar.setVisibility(View.INVISIBLE);
         mQuipParcelable = data;
 
         if(data == null){
@@ -59,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     }
 
-    private void loadStageActivity(){
+    private void loadStageActivity(QuipParcelable data){
         Bundle bundle = new Bundle();
-        bundle.putParcelable(QuipParcelable.EXTRA_KEY, mQuipParcelable);
+        bundle.putParcelable(QuipParcelable.EXTRA_KEY, data);
         Intent intent = new Intent(this, StageActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
