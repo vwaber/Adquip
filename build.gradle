@@ -1,10 +1,8 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         jcenter()
         maven {
-            url "https://maven.google.com"
+            url 'https://maven.google.com'
         }
     }
     dependencies {
@@ -16,11 +14,28 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://maven.google.com"
+            url 'https://maven.google.com'
         }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task testBackend{
+
+    group = 'verification'
+
+    project(":backend").afterEvaluate { backend ->
+        backend.extensions.appengine.daemon = true
+    }
+
+    dependsOn ':backend:appengineRun'
+    dependsOn ':app:connectedAndroidTest'
+
+    tasks.getByPath(':app:connectedAndroidTest').mustRunAfter ':backend:appengineRun'
+    tasks.getByPath(':backend:appengineRun').finalizedBy ':backend:appengineStop'
+    tasks.getByPath(':backend:appengineStop').mustRunAfter ':app:connectedAndroidTest'
+
 }
