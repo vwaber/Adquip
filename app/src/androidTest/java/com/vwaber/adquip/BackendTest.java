@@ -1,5 +1,6 @@
 package com.vwaber.adquip;
 
+import android.support.test.annotation.UiThreadTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.vwaber.quipstage.QuipParcelable;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertNotNull;
 public class BackendTest implements EndpointsAsyncTask.TaskListener {
 
     @Test
+    @UiThreadTest
     public void testResponse() {
         new EndpointsAsyncTask(this).execute();
     }
